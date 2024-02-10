@@ -1,9 +1,9 @@
-package br.com.mtbassi.opovo.api.modules.journalists.dto;
+package br.com.mtbassi.opovo.api.modules.auth.dto;
 
 import lombok.Data;
 
 @Data
-public class LoginDTO {
+public class LoginRequest {
 
     private String email;
     private String password;

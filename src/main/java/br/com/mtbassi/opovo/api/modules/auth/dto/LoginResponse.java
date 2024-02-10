@@ -1,4 +1,4 @@
-package br.com.mtbassi.opovo.api.modules.journalists.dto;
+package br.com.mtbassi.opovo.api.modules.auth.dto;
 
 import lombok.Builder;
 import lombok.Data;

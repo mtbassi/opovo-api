@@ -1,7 +1,7 @@
 package br.com.mtbassi.opovo.api.modules.auth.controllers;
 
-import br.com.mtbassi.opovo.api.modules.journalists.dto.LoginDTO;
-import br.com.mtbassi.opovo.api.modules.journalists.dto.LoginResponse;
+import br.com.mtbassi.opovo.api.modules.auth.dto.LoginRequest;
+import br.com.mtbassi.opovo.api.modules.auth.dto.LoginResponse;
 import br.com.mtbassi.opovo.api.modules.auth.services.AuthenticationService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +19,7 @@ public class AuthenticationController {
     private final AuthenticationService service;
 
     @PostMapping
-    public ResponseEntity<LoginResponse> login(@RequestBody @Valid LoginDTO data) {
+    public ResponseEntity<LoginResponse> login(@RequestBody @Valid LoginRequest data) {
         return ResponseEntity.ok(this.service.login(data));
     }
 }
