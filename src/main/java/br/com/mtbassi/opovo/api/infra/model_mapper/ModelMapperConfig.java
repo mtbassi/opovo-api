@@ -1,4 +1,4 @@
-package br.com.mtbassi.opovo.api.infra.modelmapper;
+package br.com.mtbassi.opovo.api.infra.model_mapper;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
