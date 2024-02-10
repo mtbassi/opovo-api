@@ -1,5 +1,6 @@
-package br.com.mtbassi.opovo.api.modules.journalists.services;
+package br.com.mtbassi.opovo.api.modules.auth.services;
 
+import br.com.mtbassi.opovo.api.modules.journalists.services.JournalistService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
