@@ -1,4 +1,4 @@
-package br.com.mtbassi.opovo.api.infra.security;
+package br.com.mtbassi.opovo.api.modules.commons.utils;
 
 import br.com.mtbassi.opovo.api.modules.journalists.dto.JournalistResponse;
 import org.modelmapper.ModelMapper;
