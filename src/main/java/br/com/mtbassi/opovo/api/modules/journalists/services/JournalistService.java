@@ -1,6 +1,6 @@
 package br.com.mtbassi.opovo.api.modules.journalists.services;
 
-import br.com.mtbassi.opovo.api.infra.security.TokenUtils;
+import br.com.mtbassi.opovo.api.modules.commons.utils.TokenUtils;
 import br.com.mtbassi.opovo.api.modules.journalists.dto.JournalistRequest;
 import br.com.mtbassi.opovo.api.modules.journalists.dto.JournalistResponse;
 import br.com.mtbassi.opovo.api.modules.journalists.entities.JournalistEntity;
@@ -8,7 +8,6 @@ import br.com.mtbassi.opovo.api.modules.journalists.repositories.JournalistRepos
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
