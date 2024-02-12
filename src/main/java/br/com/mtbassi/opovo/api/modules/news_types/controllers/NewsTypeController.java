@@ -6,11 +6,10 @@ import br.com.mtbassi.opovo.api.modules.news_types.services.NewsTypeService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/type")
@@ -24,5 +23,10 @@ public class NewsTypeController {
         var newsType = this.service.create(data);
         var uri = uriBuilder.path("/type/me").build().toUri();
         return ResponseEntity.created(uri).body(newsType);
+    }
+
+    @GetMapping("/me")
+    public ResponseEntity<List<NewsTypeResponse>> me() {
+        return ResponseEntity.ok(this.service.listNewsTypes());
     }
 }
