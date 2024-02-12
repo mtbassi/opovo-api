@@ -6,6 +6,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,8 +18,10 @@ import java.util.Objects;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class SecurityFilter extends OncePerRequestFilter {
 
+    private static final String AUTH_TYPE = "Bearer";
     private final TokenService tokenService;
     private final JournalistService journalistService;
 
@@ -30,13 +33,15 @@ public class SecurityFilter extends OncePerRequestFilter {
             UserDetails user = journalistService.loadUserByUsername(login);
             var authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
+        } else {
+            log.info("Token validation failed. User not found.");
         }
         filterChain.doFilter(request, response);
     }
 
     private String recoverToken(HttpServletRequest request) {
         var authHeader = request.getHeader("Authorization");
-        if (Objects.isNull(authHeader)) return null;
-        return authHeader.replace("Bearer ", "");
+        if (Objects.isNull(authHeader) || AUTH_TYPE.equals(authHeader)) return null;
+        return authHeader.replace(AUTH_TYPE + " ", "");
     }
 }

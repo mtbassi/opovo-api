@@ -9,7 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/type")
@@ -28,5 +30,16 @@ public class NewsTypeController {
     @GetMapping("/me")
     public ResponseEntity<List<NewsTypeResponse>> me() {
         return ResponseEntity.ok(this.service.listNewsTypes());
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<NewsTypeResponse> update(@RequestBody @Valid NewsTypeRequest data, @PathVariable UUID id){
+        return ResponseEntity.ok(this.service.update(data, id));
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Object> delete(@PathVariable UUID id){
+        this.service.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }
