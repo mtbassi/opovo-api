@@ -6,10 +6,7 @@ import br.com.mtbassi.opovo.api.modules.journalists.services.JournalistService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
@@ -24,5 +21,10 @@ public class JournalistController {
         var response = this.service.register(data);
         var uri = uriBuilder.path("/api/{id}").buildAndExpand(response.getId()).toUri();
         return ResponseEntity.created(uri).body(response);
+    }
+
+    @GetMapping("/me")
+    public ResponseEntity<JournalistResponse> me(){
+        return ResponseEntity.ok(service.me());
     }
 }

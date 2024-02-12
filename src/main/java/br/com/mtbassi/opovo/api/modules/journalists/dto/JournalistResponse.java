@@ -1,7 +1,6 @@
 package br.com.mtbassi.opovo.api.modules.journalists.dto;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 import java.util.UUID;
@@ -20,8 +19,4 @@ public class JournalistResponse {
 
     @NotBlank
     private String email;
-
-    @NotBlank
-    @Size(min = 8)
-    private String password;
 }
