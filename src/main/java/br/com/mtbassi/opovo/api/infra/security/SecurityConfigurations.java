@@ -29,11 +29,11 @@ public class SecurityConfigurations {
             return httpSecurity
                     .csrf(AbstractHttpConfigurer::disable)
                     .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                    .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                     .authorizeHttpRequests(auth -> auth
                             .requestMatchers(HttpMethod.POST, "/register", "/login").permitAll()
                             .requestMatchers("/me", "/news/**", "type/**").hasRole("ADMIN")
                             .anyRequest().authenticated())
-                    .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                     .build();
         } catch (Exception e){
             throw new ModelException(e.getMessage(), e);
