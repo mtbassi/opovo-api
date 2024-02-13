@@ -28,10 +28,12 @@ public class SecurityFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) {
         try {
             var token = this.recoverToken(request);
-            var login = tokenService.validateToken(token);
-            UserDetails user = journalistService.loadUserByUsername(login);
-            var authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+            if (Objects.nonNull(token)) {
+                var login = tokenService.validateToken(token);
+                UserDetails user = journalistService.loadUserByUsername(login);
+                var authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+            }
             filterChain.doFilter(request, response);
         } catch (Exception e) {
             log.warn("Token validation failed. User not found.");
