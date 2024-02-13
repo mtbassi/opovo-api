@@ -8,6 +8,6 @@ import org.springframework.http.HttpStatus;
 @Builder
 public class RestErrorMessage {
 
-    private HttpStatus httpStatus;
+    private Integer httpStatus;
     private String message;
 }

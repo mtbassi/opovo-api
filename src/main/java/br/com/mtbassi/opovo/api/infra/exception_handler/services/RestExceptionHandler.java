@@ -3,6 +3,7 @@ package br.com.mtbassi.opovo.api.infra.exception_handler.services;
 import br.com.mtbassi.opovo.api.infra.exception_handler.dto.RestErrorMessage;
 import br.com.mtbassi.opovo.api.modules.commons.exceptions.ForeignKeyConstraintException;
 import br.com.mtbassi.opovo.api.modules.commons.exceptions.ModelException;
+import br.com.mtbassi.opovo.api.modules.news.exceptions.NewsNotFoundException;
 import br.com.mtbassi.opovo.api.modules.news_types.exceptions.NewsTypeNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,8 +22,8 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
                 .body(buildRestErrorMessage(e, httpStatus));
     }
 
-    @ExceptionHandler(NewsTypeNotFoundException.class)
-    private ResponseEntity<RestErrorMessage> newsTypeNotFoundHandler(NewsTypeNotFoundException e) {
+    @ExceptionHandler({NewsTypeNotFoundException.class, NewsNotFoundException.class})
+    private ResponseEntity<RestErrorMessage> newsTypeNotFoundHandler(RuntimeException e) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body(buildRestErrorMessage(e, HttpStatus.NOT_FOUND));
     }
@@ -35,7 +36,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
     private RestErrorMessage buildRestErrorMessage(Exception e, HttpStatus httpStatus){
         return RestErrorMessage.builder()
-                .httpStatus(httpStatus)
+                .httpStatus(httpStatus.value())
                 .message(e.getMessage())
                 .build();
     }
