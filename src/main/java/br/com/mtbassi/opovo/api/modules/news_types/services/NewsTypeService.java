@@ -44,7 +44,8 @@ public class NewsTypeService {
 
     public void delete(UUID id){
         if(this.newsService.hasNewsWithTypeOfNews(id)) throw new ForeignKeyConstraintException("Type of news linked to existing news.");
-        this.repository.deleteById(id);
+        var newsType = this.repository.findById(id).orElseThrow(NewsTypeNotFoundException::new);
+        this.repository.delete(newsType);
     }
 
     private NewsTypeEntity buildNewsType(NewsTypeRequest data) {

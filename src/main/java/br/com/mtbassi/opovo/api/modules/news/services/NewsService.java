@@ -46,7 +46,8 @@ public class NewsService {
     }
 
     public void delete(UUID id){
-        this.repository.deleteById(id);
+        var news = this.repository.findById(id).orElseThrow(NewsNotFoundException::new);
+        this.repository.delete(news);
     }
 
     public boolean hasNewsWithTypeOfNews(UUID id) {
