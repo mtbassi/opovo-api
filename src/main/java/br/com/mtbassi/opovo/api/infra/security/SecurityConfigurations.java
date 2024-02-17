@@ -31,11 +31,12 @@ public class SecurityConfigurations {
                     .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                     .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                     .authorizeHttpRequests(auth -> auth
+                            .requestMatchers("/docs-opovo/**", "/swagger-ui/index.html", "/docs-opovo-api.html", "/swagger-ui/**").permitAll()
                             .requestMatchers(HttpMethod.POST, "/register", "/login").permitAll()
                             .requestMatchers("/me", "/news/**", "type/**").hasRole("ADMIN")
                             .anyRequest().authenticated())
                     .build();
-        } catch (Exception e){
+        } catch (Exception e) {
             throw new ModelException(e.getMessage(), e);
         }
     }
