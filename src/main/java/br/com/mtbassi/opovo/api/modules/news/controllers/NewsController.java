@@ -4,7 +4,6 @@ import br.com.mtbassi.opovo.api.modules.news.dto.NewsRequest;
 import br.com.mtbassi.opovo.api.modules.news.dto.NewsResponse;
 import br.com.mtbassi.opovo.api.modules.news.services.NewsService;
 import jakarta.validation.Valid;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
