@@ -5,6 +5,7 @@ import br.com.mtbassi.opovo.api.modules.commons.exceptions.ForeignKeyConstraintE
 import br.com.mtbassi.opovo.api.modules.commons.exceptions.ModelException;
 import br.com.mtbassi.opovo.api.modules.news.exceptions.NewsNotFoundException;
 import br.com.mtbassi.opovo.api.modules.news_types.exceptions.NewsTypeNotFoundException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -21,6 +22,13 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         return ResponseEntity.status(httpStatus)
                 .body(buildRestErrorMessage(e, httpStatus));
     }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    private ResponseEntity<RestErrorMessage> dataIntegrityViolationHandler (DataIntegrityViolationException e){
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(buildRestErrorMessage(e, HttpStatus.CONFLICT));
+    }
+
 
     @ExceptionHandler({NewsTypeNotFoundException.class, NewsNotFoundException.class})
     private ResponseEntity<RestErrorMessage> newsTypeNotFoundHandler(RuntimeException e) {
