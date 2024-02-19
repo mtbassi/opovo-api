@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -39,6 +40,7 @@ public class NewsTypeController {
                     @ApiResponse(responseCode = "409", description = "Unique Constraint Violation.",
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = RestErrorMessage.class)))
             })
+    @SecurityRequirement(name = "Bearer Authentication", scopes = {})
     @PostMapping("/create")
     public ResponseEntity<NewsTypeResponse> create(@RequestBody @Valid NewsTypeRequest data, UriComponentsBuilder uriBuilder) {
         var newsType = this.service.create(data);
@@ -55,6 +57,7 @@ public class NewsTypeController {
                     @ApiResponse(responseCode = "403", description = "Token validation failed. User not found.",
                             content = @Content(mediaType = "application/json", schema = @Schema()))
             })
+    @SecurityRequirement(name = "Bearer Authentication", scopes = {})
     @GetMapping("/me")
     public ResponseEntity<List<NewsTypeResponse>> me() {
         return ResponseEntity.ok(this.service.listNewsTypes());
@@ -70,6 +73,7 @@ public class NewsTypeController {
                     @ApiResponse(responseCode = "404", description = "Resource not found.",
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = RestErrorMessage.class)))
             })
+    @SecurityRequirement(name = "Bearer Authentication", scopes = {})
     @PutMapping("/update/{id}")
     public ResponseEntity<NewsTypeResponse> update(@RequestBody @Valid NewsTypeRequest data, @PathVariable UUID id){
         return ResponseEntity.ok(this.service.update(data, id));
@@ -85,6 +89,7 @@ public class NewsTypeController {
                     @ApiResponse(responseCode = "404", description = "Resource not found.",
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = RestErrorMessage.class)))
             })
+    @SecurityRequirement(name = "Bearer Authentication", scopes = {})
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Object> delete(@PathVariable UUID id){
         this.service.delete(id);
