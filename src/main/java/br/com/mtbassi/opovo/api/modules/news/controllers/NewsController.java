@@ -6,6 +6,7 @@ import br.com.mtbassi.opovo.api.modules.news.dto.NewsRequest;
 import br.com.mtbassi.opovo.api.modules.news.dto.NewsResponse;
 import br.com.mtbassi.opovo.api.modules.news.services.NewsService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -50,7 +51,8 @@ public class NewsController {
             description = "Resource lists the journalist’s news.",
             responses = {
                     @ApiResponse(responseCode = "200", description = "Resource consulted successfully.",
-                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = JournalistResponse.class))),
+                            content = @Content(mediaType = "application/json",
+                                    array = @ArraySchema(schema = @Schema(implementation = JournalistResponse.class)))),
                     @ApiResponse(responseCode = "403", description = "Token validation failed. User not found.",
                             content = @Content(mediaType = "application/json", schema = @Schema()))
             })
@@ -63,7 +65,8 @@ public class NewsController {
             description = "Resource lists the journalist’s news by type of news.",
             responses = {
                     @ApiResponse(responseCode = "200", description = "Resource consulted successfully.",
-                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = JournalistResponse.class))),
+                            content = @Content(mediaType = "application/json",
+                                    array = @ArraySchema(schema = @Schema(implementation = JournalistResponse.class)))),
                     @ApiResponse(responseCode = "403", description = "Token validation failed. User not found.",
                             content = @Content(mediaType = "application/json", schema = @Schema()))
             })
