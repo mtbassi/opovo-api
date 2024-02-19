@@ -74,10 +74,10 @@ DELETE /news/delete/{id}   - Delete news.
 
 **News type**
 ```markdown
-POST   /type/create        - Create news type.
-GET    /type/me            - List news type.
-PUT    /type/update/{id}   - Update news type.
-DELETE /type/delete/{id}   - Delete news type.
+POST   /type/create      - Create news type.
+GET    /type/me          - List news type.
+PUT    /type/update/{id} - Update news type.
+DELETE /type/delete/{id} - Delete news type.
 ```
 
 ## Contributing
