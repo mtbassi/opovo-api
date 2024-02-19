@@ -13,7 +13,6 @@ This project is an API built using **Java, Java Spring and MySQL.**
 - [Configuration](#configuration)
 - [Usage](#usage)
 - [API Endpoints](#api-endpoints)
-- [Database](#database)
 - [Contributing](#contributing)
 
 ## Installation
