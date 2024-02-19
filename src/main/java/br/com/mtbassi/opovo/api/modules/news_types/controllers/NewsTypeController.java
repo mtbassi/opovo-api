@@ -24,7 +24,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/type")
 @RequiredArgsConstructor
-@Tag(name = "News type")
+@Tag(name = "News type", description = "Contains operations for managing news types.")
 public class NewsTypeController {
 
     private final NewsTypeService service;

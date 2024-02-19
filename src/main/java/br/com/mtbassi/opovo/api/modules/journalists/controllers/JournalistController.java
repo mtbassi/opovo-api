@@ -18,7 +18,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 @RestController
 @RequestMapping
 @RequiredArgsConstructor
-@Tag(name = "Journalist")
+@Tag(name = "Journalist", description = "Contains operations for managing journalists.")
 public class JournalistController {
 
     private final JournalistService service;

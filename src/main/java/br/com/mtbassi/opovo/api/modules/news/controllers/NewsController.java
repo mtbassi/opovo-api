@@ -22,7 +22,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/news")
 @RequiredArgsConstructor
-@Tag(name = "News")
+@Tag(name = "News", description = "Contains operations for managing news.")
 public class NewsController {
 
     private final NewsService service;
