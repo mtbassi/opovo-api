@@ -6,16 +6,12 @@ import br.com.mtbassi.opovo.api.modules.news.dto.NewsResponse;
 import br.com.mtbassi.opovo.api.modules.news.entities.NewsEntity;
 import br.com.mtbassi.opovo.api.modules.news.exceptions.NewsNotFoundException;
 import br.com.mtbassi.opovo.api.modules.news.repositories.NewsRepository;
-import br.com.mtbassi.opovo.api.modules.news_types.dto.NewsTypeResponse;
-import br.com.mtbassi.opovo.api.modules.news_types.entities.NewsTypeEntity;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.Condition;
 import org.modelmapper.Conditions;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.UUID;
 
 @Service
@@ -39,14 +35,14 @@ public class NewsService {
     }
 
     public NewsResponse update(NewsRequest data, UUID id){
-        var news = this.repository.findById(id).orElseThrow(NewsNotFoundException::new);
+        var news = this.repository.findByIdAndIdJournalist(id, TokenUtils.getIdToken()).orElseThrow(NewsNotFoundException::new);
         modelMapper.getConfiguration().setPropertyCondition(Conditions.isNotNull());
         modelMapper.map(data, news);
         return modelMapper.map(this.repository.save(news), NewsResponse.class);
     }
 
     public void delete(UUID id){
-        var news = this.repository.findById(id).orElseThrow(NewsNotFoundException::new);
+        var news = this.repository.findByIdAndIdJournalist(id, TokenUtils.getIdToken()).orElseThrow(NewsNotFoundException::new);
         this.repository.delete(news);
     }
 

@@ -46,7 +46,7 @@ public class JournalistController {
                     @ApiResponse(responseCode = "200", description = "Resource retrieved successfully.",
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = JournalistResponse.class))),
                     @ApiResponse(responseCode = "403", description = "Token validation failed. User not found.",
-                            content = @Content)
+                            content = @Content(mediaType = "application/json", schema = @Schema())),
             })
     @GetMapping("/me")
     public ResponseEntity<JournalistResponse> me(){
