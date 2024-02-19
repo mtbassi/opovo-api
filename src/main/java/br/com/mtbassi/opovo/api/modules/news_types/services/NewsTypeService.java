@@ -33,7 +33,7 @@ public class NewsTypeService {
     }
 
     public NewsTypeResponse update(NewsTypeRequest data, UUID id){
-        this.repository.findById(id).orElseThrow(NewsTypeNotFoundException::new);
+        this.repository.findByIdAndIdJournalist(id, TokenUtils.getIdToken()).orElseThrow(NewsTypeNotFoundException::new);
         var newsType = NewsTypeEntity.builder()
                 .id(id)
                 .idJournalist(TokenUtils.getIdToken())
@@ -44,7 +44,7 @@ public class NewsTypeService {
 
     public void delete(UUID id){
         if(this.newsService.hasNewsWithTypeOfNews(id)) throw new ForeignKeyConstraintException("Type of news linked to existing news.");
-        var newsType = this.repository.findById(id).orElseThrow(NewsTypeNotFoundException::new);
+        var newsType = this.repository.findByIdAndIdJournalist(id, TokenUtils.getIdToken()).orElseThrow(NewsTypeNotFoundException::new);
         this.repository.delete(newsType);
     }
 

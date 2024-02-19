@@ -1,7 +1,6 @@
 package br.com.mtbassi.opovo.api.modules.news.controllers;
 
 import br.com.mtbassi.opovo.api.infra.exception_handler.dto.RestErrorMessage;
-import br.com.mtbassi.opovo.api.modules.journalists.dto.JournalistResponse;
 import br.com.mtbassi.opovo.api.modules.news.dto.NewsRequest;
 import br.com.mtbassi.opovo.api.modules.news.dto.NewsResponse;
 import br.com.mtbassi.opovo.api.modules.news.services.NewsService;
@@ -33,7 +32,7 @@ public class NewsController {
             description = "Resource creates new news.",
             responses = {
                     @ApiResponse(responseCode = "201", description = "Resource created successfully.",
-                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = JournalistResponse.class))),
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = NewsResponse.class))),
                     @ApiResponse(responseCode = "403", description = "Token validation failed. User not found.",
                             content = @Content(mediaType = "application/json", schema = @Schema())),
                     @ApiResponse(responseCode = "409", description = "Unique Constraint Violation.",
@@ -52,7 +51,7 @@ public class NewsController {
             responses = {
                     @ApiResponse(responseCode = "200", description = "Resource consulted successfully.",
                             content = @Content(mediaType = "application/json",
-                                    array = @ArraySchema(schema = @Schema(implementation = JournalistResponse.class)))),
+                                    array = @ArraySchema(schema = @Schema(implementation = NewsResponse.class)))),
                     @ApiResponse(responseCode = "403", description = "Token validation failed. User not found.",
                             content = @Content(mediaType = "application/json", schema = @Schema()))
             })
@@ -66,7 +65,7 @@ public class NewsController {
             responses = {
                     @ApiResponse(responseCode = "200", description = "Resource consulted successfully.",
                             content = @Content(mediaType = "application/json",
-                                    array = @ArraySchema(schema = @Schema(implementation = JournalistResponse.class)))),
+                                    array = @ArraySchema(schema = @Schema(implementation = NewsResponse.class)))),
                     @ApiResponse(responseCode = "403", description = "Token validation failed. User not found.",
                             content = @Content(mediaType = "application/json", schema = @Schema()))
             })
@@ -79,10 +78,10 @@ public class NewsController {
             description = "Resource updates the news by id.",
             responses = {
                     @ApiResponse(responseCode = "200", description = "Resource updated successfully.",
-                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = JournalistResponse.class))),
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = NewsResponse.class))),
                     @ApiResponse(responseCode = "403", description = "Token validation failed. User not found.",
                             content = @Content(mediaType = "application/json", schema = @Schema())),
-                    @ApiResponse(responseCode = "404", description = "News not found.",
+                    @ApiResponse(responseCode = "404", description = "Resource not found.",
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = RestErrorMessage.class)))
             })
     @PutMapping("/update/{id}")
@@ -94,10 +93,10 @@ public class NewsController {
             description = "Resource deletes news by id.",
             responses = {
                     @ApiResponse(responseCode = "204", description = "Resource deleted successfully.",
-                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = JournalistResponse.class))),
+                            content = @Content(mediaType = "application/json", schema = @Schema())),
                     @ApiResponse(responseCode = "403", description = "Token validation failed. User not found.",
                             content = @Content(mediaType = "application/json", schema = @Schema())),
-                    @ApiResponse(responseCode = "404", description = "News not found.",
+                    @ApiResponse(responseCode = "404", description = "Resource not found.",
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = RestErrorMessage.class)))
             })
     @DeleteMapping("/delete/{id}")
