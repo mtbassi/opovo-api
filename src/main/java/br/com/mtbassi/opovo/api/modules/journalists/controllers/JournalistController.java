@@ -49,7 +49,7 @@ public class JournalistController {
                     @ApiResponse(responseCode = "403", description = "Token validation failed. User not found.",
                             content = @Content(mediaType = "application/json", schema = @Schema())),
             })
-    @SecurityRequirement(name = "Bearer Authentication", scopes = {})
+    @SecurityRequirement(name = "Bearer Authentication")
     @GetMapping("/me")
     public ResponseEntity<JournalistResponse> me(){
         return ResponseEntity.ok(service.me());
